@@ -1,0 +1,142 @@
+{
+  "name": "contextual-snippet",
+  "publisher": "imran-Ashiq",
+  "displayName": "Contextual Snippet Manager",
+  "description": "Save and manage code snippets with their essential context, including the ability to jump back to the source.",
+  "version": "1.0.0",
+  "icon": "images/logo.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Imran-Ashiq/contextual-snippet.git"
+  },
+  "engines": {
+    "vscode": "^1.103.0"
+  },
+  "categories": [
+    "Snippets"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+"contributes": {
+    "commands": [
+      {
+    "command": "contextual-snippet.searchSnippets",
+    "title": "Search Snippets",
+    "icon": "$(search)"
+},
+{
+    "command": "contextual-snippet.clearSearch",
+    "title": "Clear Search",
+    "icon": "$(clear-all)"
+},
+      {
+    "command": "contextual-snippet.goToSource",
+    "title": "Go to Source",
+    "icon": "$(go-to-file)"
+},
+        {
+            "command": "contextual-snippet.saveSnippet",
+            "title": "Save as Contextual Snippet"
+        },
+        {
+            "command": "contextual-snippet.insertSnippet",
+            "title": "Insert Snippet"
+        },
+        {
+            "command": "contextual-snippet.deleteSnippet",
+            "title": "Delete Snippet",
+            "icon": "$(trash)"
+        },
+        {
+    "command": "contextual-snippet.copySnippet",
+    "title": "Copy Snippet",
+    "icon": "$(clippy)"
+    }
+    ],
+    "menus": {
+      "view/title": [
+    {
+        "command": "contextual-snippet.searchSnippets",
+        "when": "view == snippet-explorer",
+        "group": "navigation"
+    },
+    {
+        "command": "contextual-snippet.clearSearch",
+        "when": "view == snippet-explorer && contextual-snippet.searchActive",
+        "group": "navigation"
+    }
+],
+        "editor/context": [
+          
+            {
+                "when": "editorHasSelection",
+                "command": "contextual-snippet.saveSnippet",
+                "group": "navigation"
+            }
+        ],
+        "view/item/context": [
+          {
+    "command": "contextual-snippet.goToSource",
+    "when": "view == snippet-explorer && viewItem == snippetTreeItemWithSource",
+    "group": "inline"
+},
+          {
+    "command": "contextual-snippet.copySnippet",
+    "when": "view == snippet-explorer",
+    "group": "inline"
+     },
+            {
+                "command": "contextual-snippet.deleteSnippet",
+                "when": "view == snippet-explorer",
+                "group": "inline"
+            }
+        ]
+        
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "snippet-manager",
+          "title": "Snippet Manager",
+          "icon": "images/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "snippet-manager": [
+        {
+          "id": "snippet-explorer",
+          "name": "My Snippets",
+          "icon": "images/icon.svg"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.103.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "@typescript-eslint/eslint-plugin": "^8.39.0",
+    "@typescript-eslint/parser": "^8.39.0",
+    "eslint": "^9.32.0",
+    "esbuild": "^0.25.8",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.9.2",
+    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-electron": "^2.5.2"
+  }
+}
