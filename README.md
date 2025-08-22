@@ -80,9 +80,4 @@ code --install-extension imran-Ashiq.contextual-snippet
 
 This project is licensed under the MIT License
 
-
-</br> <div align="center">
-
 ⭐ If you find this extension useful, don’t forget to star the repo! ⭐
-
-</div>
